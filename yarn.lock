@@ -1073,10 +1073,10 @@ buffer-from@^1.0.0:
   resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
   integrity sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==
 
-bulma-stylus@0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/bulma-stylus/-/bulma-stylus-0.8.0.tgz#137c182a1fdf9ac82f2e73bd3163aac454b105ae"
-  integrity sha512-9Q9BMPeHFyJ5EWh/tJPCcLDYEovKzUBOyMHsKEIyxSYEKG8wqt9RVuTumaJ2AfDjyHC9OifWKOfJSweKYD5IMQ==
+bulma-stylus@0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/bulma-stylus/-/bulma-stylus-0.9.1.tgz#a3d52ed078eef35efe5229ff4d8fbddd65d17f32"
+  integrity sha512-00u1O/RTyA+9SYZVYljliZcTltgCeZ/Ln0dLzAhYEWkS8WaMf7KWIimbnozSwemhlM0ZiDsHIMvMjoUAayRZ9Q==
 
 bytes@3.0.0:
   version "3.0.0"
