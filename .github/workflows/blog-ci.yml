@@ -49,7 +49,6 @@ jobs:
           git config --global user.email $GIT_EMAIL
 
       - name: Install dependencies
-        env:
         run: |
           yarn
 
