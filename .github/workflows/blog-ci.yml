@@ -19,8 +19,7 @@ jobs:
 
     - name: Configuration environment
         run: |
-          git config --global user.name $GIT_USER
-          git config --global user.email $GIT_EMAIL
+          git --version
 
     - name: Install & Build & deploy # 安装依赖打包静态资源
       run: |
