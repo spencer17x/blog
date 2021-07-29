@@ -100,9 +100,9 @@ ignore:
 theme: icarus
 
 # Deployment
-## Docs: https://hexo.io/docs/one-command-deployment
-#deploy:
-#  type: git
-#  repo: https://github.com/Spencer17x/Spencer17x.github.io.git
-#  branch: main
+# Docs: https://hexo.io/docs/one-command-deployment
+deploy:
+  type: git
+  repo: git@github.com:Spencer17x/Spencer17x.github.io.git
+  branch: main
 
