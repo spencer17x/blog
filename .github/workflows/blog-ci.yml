@@ -17,10 +17,10 @@ jobs:
       with:
         node-version: '12.x'
 
-#    - name: Configuration environment
-#        run: |
-#          git config --global user.name $GIT_USER
-#          git config --global user.email $GIT_EMAIL
+    - name: Configuration environment
+        run: |
+          git config --global user.name $GIT_USER
+          git config --global user.email $GIT_EMAIL
 
     - name: Install & Build & deploy # 安装依赖打包静态资源
       run: |
