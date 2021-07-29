@@ -50,9 +50,15 @@ jobs:
           git config --global user.email $GIT_EMAIL
 
       - name: Install dependencies
+        env:
+          HEXO_DEPLOY_PRI: ${{secrets.HEXO_DEPLOY_PRI}}
+          GITHUB_TOKEN: ${{secrets.bash_script}}
         run: |
           yarn
 
       - name: Deploy hexo
+        env:
+          HEXO_DEPLOY_PRI: ${{secrets.HEXO_DEPLOY_PRI}}
+          GITHUB_TOKEN: ${{secrets.bash_script}}
         run: |
           yarn deploy
