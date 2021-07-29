@@ -2,7 +2,8 @@ name: Blog CI # 配置名称
 
 on: # 触发条件，master分支push代码后触发workflow
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
@@ -15,6 +16,11 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
+
+    - name: Configuration environment
+        run: |
+          git config --global user.name $GIT_USER
+          git config --global user.email $GIT_EMAIL
 
     - name: Install & Build & deploy # 安装依赖打包静态资源
       run: |
