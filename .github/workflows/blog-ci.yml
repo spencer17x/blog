@@ -5,6 +5,10 @@ on: # 触发条件，master分支push代码后触发workflow
     branches:
       - main
 
+env:
+  GIT_USER: Spencer17x
+  GIT_EMAIL: 1253478653@qq.com
+
 jobs:
   build:
     runs-on: ubuntu-latest # 构建运行环境
@@ -19,7 +23,8 @@ jobs:
 
     - name: Configuration environment
         run: |
-          git --version
+          git config --global user.name $GIT_USER
+          git config --global user.email $GIT_EMAIL
 
     - name: Install & Build & deploy # 安装依赖打包静态资源
       run: |
