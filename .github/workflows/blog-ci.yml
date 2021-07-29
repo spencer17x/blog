@@ -54,11 +54,11 @@ jobs:
 
       - name: Clean
         run: |
-          - yarn clean
+          yarn clean
 
       - name: Build
         run: |
-          - yarn build
+          yarn build
 
       - name: Deploy hexo
         run: |
