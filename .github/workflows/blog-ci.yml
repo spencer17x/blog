@@ -52,14 +52,6 @@ jobs:
         run: |
           yarn
 
-      - name: Clean
-        run: |
-          yarn clean
-
-      - name: Build
-        run: |
-          yarn build
-
       - name: Deploy hexo
         run: |
           yarn deploy
