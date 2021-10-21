@@ -161,13 +161,13 @@ location / {
 
 配置成功，你就可以正常访问页面了，如下图所示：
 
-![](/articleImgs/1.png)
+![](/articleImgs/Nginx-正则配置实现带版本号请求页面/1.png)
 
-![](/articleImgs/2.png)
+![](/articleImgs/Nginx-正则配置实现带版本号请求页面/2.png)
 
 如果不进行 ``try_files`` 配置的话，刷新页面会得到 404 页面，如下图所示：
 
-![](/articleImgs/3.png)
+![](/articleImgs/Nginx-正则配置实现带版本号请求页面/3.png)
 
 # 需求实现
 
