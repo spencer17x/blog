@@ -1,7 +1,8 @@
 ---
 title: Nginx 正则配置实现带版本号请求页面
 date: 2021-10-19 00:22:29
-tags: - Nginx
+tags: 
+    - Nginx
 ---
 
 # 需求背景

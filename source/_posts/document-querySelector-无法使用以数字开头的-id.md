@@ -1,7 +1,8 @@
 ---
 title: document.querySelector() 无法使用以数字开头的 id
 date: 2022-02-18 14:40:44
-tags: - Front-end
+tags: 
+    - Front-end
 ---
 
 一次开发中使用 document.querySelector 发现会报错
