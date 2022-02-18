@@ -1,8 +1,7 @@
 ---
 title: 关于 Chrome 音视频自动播放的问题
 date: 2022-02-18 11:16:17
-tags:
-    - Front-end
+tags: - Front-end
 ---
     
 在 Chrome 音视频播放的时候，play() 返回的是一个 promise，当播放失败的时候一般会显示一个按钮让用户手动进行播放。

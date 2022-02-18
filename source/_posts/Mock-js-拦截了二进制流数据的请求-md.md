@@ -1,8 +1,7 @@
 ---
 title: Mock.js 拦截了二进制流数据的请求.md
 date: 2021-10-17 15:38:58
-tags:
-    - Front-end
+tags: - Front-end
 ---
 
 # 背景

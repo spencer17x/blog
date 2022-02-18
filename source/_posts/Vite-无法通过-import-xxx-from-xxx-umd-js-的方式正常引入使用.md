@@ -1,8 +1,7 @@
 ---
 title: Vite 无法通过 import xxx from 'path/xxx.umd.js' 的方式正常引入 UMD 模块使用
 date: 2021-10-20 14:22:48
-tags:
-    - Front-end
+tags: - Front-end
 ---
 
 # 背景

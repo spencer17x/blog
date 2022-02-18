@@ -1,8 +1,7 @@
 ---
 title: 'go test报错 wrong signature for TestAdd, must be: func TestAdd(t *testing.T)'
 date: 2021-09-21 16:08:40
-tags:
-    - Go
+tags: - Go
 ---
 
 参考: https://www.cnblogs.com/mingbai/p/gotesterr.html

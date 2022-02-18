@@ -1,8 +1,7 @@
 ---
 title: 在网站搭建初期给z-index 分层规范
 date: 2021-12-06 22:26:01
-tags:
-    - Front-end
+tags: - Front-end
 ---
 
 一般来说前端架构师在网站搭建初期就要给 z index 分层：

@@ -1,8 +1,7 @@
 ---
 title: 记一次数据过大导致safari渲染卡死
 date: 2022-02-18 11:06:57
-tags:
-    - Front-end
+tags: - Front-end
 ---
 
 在一次项目开发中，Chrome 调试移动端项目没问题，但是在移动端的 safari 下，会导致 safari 卡死。
