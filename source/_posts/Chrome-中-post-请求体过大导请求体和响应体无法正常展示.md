@@ -2,7 +2,7 @@
 title: Chrome 中 post 请求体过大导请求体和响应体无法正常展示
 date: 2021-10-21 21:05:44
 tags:
-    - 浏览器
+    - Front-end
 ---
 
 # 背景
