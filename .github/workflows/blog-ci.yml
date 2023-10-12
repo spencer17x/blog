@@ -6,9 +6,9 @@ on:
       - main
 
 env:
-  GIT_USER: Spencer17x
+  GIT_USER: spencer17x
   GIT_EMAIL: 1253478653@qq.com
-  DEPLOY_REPO: Spencer17x/Spencer17x.github.io
+  DEPLOY_REPO: spencer17x/Spencer17x.github.io
   DEPLOY_BRANCH: main
 
 jobs:
