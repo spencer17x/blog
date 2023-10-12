@@ -40,14 +40,13 @@ jobs:
         env:
           HEXO_DEPLOY_PRI: ${{secrets.HEXO_DEPLOY_PRI}}
         run: |
-          echo "$HEXO_DEPLOY_PRI"
-#          sudo timedatectl set-timezone "Asia/Shanghai"
-#          mkdir -p ~/.ssh/
-#          echo "$HEXO_DEPLOY_PRI" > ~/.ssh/id_rsa
-#          chmod 600 ~/.ssh/id_rsa
-#          ssh-keyscan github.com >> ~/.ssh/known_hosts
-#          git config --global user.name $GIT_USER
-#          git config --global user.email $GIT_EMAIL
+          sudo timedatectl set-timezone "Asia/Shanghai"
+          mkdir -p ~/.ssh/
+          echo "$HEXO_DEPLOY_PRI" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.name $GIT_USER
+          git config --global user.email $GIT_EMAIL
 
       - name: Install dependencies
         run: |
