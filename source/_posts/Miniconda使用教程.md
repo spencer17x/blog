@@ -89,3 +89,4 @@ conda config --show channels
 conda install -c anaconda scikit-learn    # 安装sklearn
 pip install -i pypi.douban.com/simple tensorflow-gpu==1.14   #用豆瓣源安装包，上面的清华园同理，记得-i
 ```
+
