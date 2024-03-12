@@ -7,7 +7,9 @@ tags:
 
 我们要实现一个订阅推特用户并将消息推送到 telegram 上，这里我们用 rss 的方式来实现，所以决定采用 [rsshub](https://github.com/DIYgod/RSSHub) 来生成订阅源，再用 [rsstt](https://github.com/Rongronggg9/RSS-to-Telegram-Bot) 来实现订阅对应用户的 rss 源。这样就可以将订阅的推特用户消息推送到 telegram 频道或者用户上。
 
-由于我买的是国内的服务器，但是访问 推特/telegram 需要科学上网。所以我们需要先在服务器上配置科学上网。
+>  由于我买的是国内的服务器，但是访问 推特/telegram 需要科学上网。所以我们需要先在服务器上配置科学上网。
+
+>  当然，如果你的服务器可以直接访问国外的网站，那就不需要配置科学上网这一步了。同时后续的 docker-compose.yml 文件里的 proxy 代理相关配置也不需要了。
 
 ## 配置科学上网
 
