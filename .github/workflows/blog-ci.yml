@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node_version: [12.x]
+        node_version: [18.x]
 
     steps:
       - name: Checkout
@@ -31,10 +31,16 @@ jobs:
           ref: ${{ env.DEPLOY_BRANCH }}
           path: .deploy_git
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
       - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node_version }}
+          cache: 'pnpm'
 
       - name: Configuration environment
         env:
@@ -49,17 +55,13 @@ jobs:
           git config --global user.email $GIT_EMAIL
 
       - name: Install dependencies
-        run: |
-          yarn
+        run: pnpm install
 
       - name: Clean
-        run: |
-          yarn clean
+        run: pnpm clean
 
       - name: Build
-        run: |
-          yarn build
+        run: pnpm build
 
       - name: Deploy hexo
-        run: |
-          yarn deploy
+        run: pnpm deploy
