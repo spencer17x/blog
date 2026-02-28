@@ -2,7 +2,7 @@
 title: 浏览器端如何在没有 HTTPS 环境下使用 WebRTC
 date: 2022-02-18 12:54:50
 tags: 
-    - webRTC
+    - WebRTC
 ---
 
 需求：两台pc设备通过rtc来建立连接进行音视频通话。
