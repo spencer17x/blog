@@ -58,10 +58,10 @@ jobs:
         run: pnpm install
 
       - name: Clean
-        run: pnpm clean
+        run: pnpm run clean
 
       - name: Build
-        run: pnpm build
+        run: pnpm run build
 
       - name: Deploy hexo
-        run: pnpm deploy
+        run: pnpm run deploy
