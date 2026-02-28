@@ -1,5 +1,5 @@
 ---
-title: go test报错 wrong signature for TestAdd, must be: func TestAdd(t *testing.T)
+title: 'go test报错 wrong signature for TestAdd, must be: func TestAdd(t *testing.T)'
 date: 2021-09-21 16:08:40
 tags: 
     - Go
