@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "build": "hexo generate",
-    "clean": "yarn hexo clean",
+    "clean": "pnpm hexo clean",
     "deploy": "hexo deploy",
-    "server": "hexo server"
+    "server": "hexo server",
+    "new": "hexo new"
   },
   "hexo": {
     "version": "6.0.0"
