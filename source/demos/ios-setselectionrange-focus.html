@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>iOS Safari setSelectionRange focus demo</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #17202a;
+      --muted: #5f6b7a;
+      --line: #d7dde5;
+      --accent: #0b6bcb;
+      --danger: #b42318;
+      --ok: #137333;
+      --shadow: 0 10px 30px rgba(23, 32, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100%;
+      padding: 18px 14px 36px;
+    }
+
+    main {
+      width: min(760px, 100%);
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 6px 0 8px;
+      font-size: 24px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    section {
+      margin-top: 14px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .quick-panel {
+      position: sticky;
+      top: 8px;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 10px;
+      border: 1px solid rgba(11, 107, 203, 0.28);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 8px 22px rgba(23, 32, 42, 0.12);
+      backdrop-filter: blur(10px);
+    }
+
+    .quick-status {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .quick-status span {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 17px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .field-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    label {
+      display: grid;
+      gap: 5px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    input {
+      width: 100%;
+      min-height: 46px;
+      border: 1px solid #b9c2cf;
+      border-radius: 7px;
+      padding: 10px 12px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 120ms ease, box-shadow 120ms ease;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(11, 107, 203, 0.16);
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    button {
+      min-height: 42px;
+      border: 1px solid #aeb8c5;
+      border-radius: 7px;
+      padding: 9px 11px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+      font-size: 14px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    button.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    button.safe {
+      border-color: rgba(19, 115, 51, 0.45);
+      color: var(--ok);
+      font-weight: 600;
+    }
+
+    button.danger {
+      border-color: rgba(180, 35, 24, 0.42);
+      color: var(--danger);
+      font-weight: 600;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .metric {
+      min-height: 58px;
+      padding: 9px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fafbfc;
+    }
+
+    .metric strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .metric span {
+      display: block;
+      overflow-wrap: anywhere;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    pre {
+      overflow: auto;
+      min-height: 190px;
+      max-height: 330px;
+      margin: 10px 0 0;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #111827;
+      color: #d1fae5;
+      font-size: 12px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.95em;
+    }
+
+    .note {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media (min-width: 680px) {
+      body {
+        padding-top: 28px;
+      }
+
+      .button-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .quick-panel {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .quick-status {
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>iOS Safari 多 input setSelectionRange 焦点复现</h1>
+    <p>在 iPhone 真机 Safari 上测试：先点进任意输入框，再触发下面的批量操作，观察焦点、键盘和日志变化。</p>
+
+    <div class="quick-panel" aria-label="快速触发区">
+      <button class="danger" type="button" data-action="batch-only">快速触发：仅批量 setSelectionRange</button>
+      <button class="safe" type="button" data-action="active-only">快速触发：只处理 activeElement</button>
+      <div class="quick-status">
+        <span>active: <strong id="quick-active">-</strong></span>
+        <span>last: <strong id="quick-last">-</strong></span>
+      </div>
+    </div>
+
+    <section aria-labelledby="fields-title">
+      <h2 id="fields-title">测试输入框</h2>
+      <div class="field-list">
+        <label>
+          input A
+          <input id="field-a" data-name="input A" value="A-13800138000" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        </label>
+        <label>
+          input B
+          <input id="field-b" data-name="input B" value="B-24681012" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        </label>
+        <label>
+          input C
+          <input id="field-c" data-name="input C" value="C-hello-ios-safari" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        </label>
+        <label>
+          input D
+          <input id="field-d" data-name="input D" value="D-last-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        </label>
+      </div>
+    </section>
+
+    <section aria-labelledby="actions-title">
+      <h2 id="actions-title">触发操作</h2>
+      <div class="button-grid">
+        <button class="primary" type="button" data-action="auto-batch">自动复现：聚焦 A 后批量 setSelectionRange</button>
+        <button type="button" data-action="batch-only">仅批量 setSelectionRange，不主动 focus</button>
+        <button type="button" data-action="batch-with-focus">批量 focus + setSelectionRange</button>
+        <button type="button" data-action="raf-batch">requestAnimationFrame 后批量 setSelectionRange</button>
+        <button class="safe" type="button" data-action="active-only">安全写法：只处理当前 activeElement</button>
+        <button class="danger" type="button" data-action="blur">清空焦点</button>
+      </div>
+      <p class="note">如果触发“仅批量 setSelectionRange”后焦点跳到最后一个输入框，说明当前 iOS Safari 环境能复现这个问题。</p>
+    </section>
+
+    <section aria-labelledby="status-title">
+      <h2 id="status-title">实时状态</h2>
+      <div class="status-grid">
+        <div class="metric">
+          <strong>activeElement</strong>
+          <span id="active-element">-</span>
+        </div>
+        <div class="metric">
+          <strong>lastFocusedInput</strong>
+          <span id="last-focused">-</span>
+        </div>
+        <div class="metric">
+          <strong>selection</strong>
+          <span id="selection">-</span>
+        </div>
+        <div class="metric">
+          <strong>visualViewport</strong>
+          <span id="viewport">-</span>
+        </div>
+      </div>
+      <pre id="log" aria-live="polite"></pre>
+    </section>
+  </main>
+
+  <script>
+    const inputs = Array.from(document.querySelectorAll('input'));
+    const logEl = document.querySelector('#log');
+    const activeEl = document.querySelector('#active-element');
+    const lastFocusedEl = document.querySelector('#last-focused');
+    const selectionEl = document.querySelector('#selection');
+    const viewportEl = document.querySelector('#viewport');
+    const quickActiveEl = document.querySelector('#quick-active');
+    const quickLastEl = document.querySelector('#quick-last');
+    let lastFocusedInput = null;
+    let actionLock = false;
+
+    function nameOf(element) {
+      if (!element) return '-';
+      if (element.dataset && element.dataset.name) return element.dataset.name;
+      if (element.id) return element.id;
+      return element.tagName ? element.tagName.toLowerCase() : String(element);
+    }
+
+    function now() {
+      const date = new Date();
+      return [
+        String(date.getHours()).padStart(2, '0'),
+        String(date.getMinutes()).padStart(2, '0'),
+        String(date.getSeconds()).padStart(2, '0'),
+        String(date.getMilliseconds()).padStart(3, '0')
+      ].join(':');
+    }
+
+    function writeLog(message) {
+      logEl.textContent = `${now()}  ${message}\n${logEl.textContent}`;
+    }
+
+    function getSelectionText(element) {
+      if (!element || typeof element.selectionStart !== 'number') return '-';
+      return `${nameOf(element)} [${element.selectionStart}, ${element.selectionEnd}]`;
+    }
+
+    function updateStatus() {
+      const active = document.activeElement;
+      activeEl.textContent = nameOf(active);
+      lastFocusedEl.textContent = nameOf(lastFocusedInput);
+      quickActiveEl.textContent = nameOf(active);
+      quickLastEl.textContent = nameOf(lastFocusedInput);
+      selectionEl.textContent = getSelectionText(active);
+
+      if (window.visualViewport) {
+        viewportEl.textContent = `${Math.round(window.visualViewport.width)} x ${Math.round(window.visualViewport.height)}`;
+      } else {
+        viewportEl.textContent = `${window.innerWidth} x ${window.innerHeight}`;
+      }
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => window.setTimeout(resolve, ms));
+    }
+
+    function setRange(input, label) {
+      try {
+        const start = Math.min(2, input.value.length);
+        const end = input.value.length;
+        input.setSelectionRange(start, end);
+        writeLog(`${label}: ${nameOf(input)} setSelectionRange(${start}, ${end}); active=${nameOf(document.activeElement)}`);
+      } catch (error) {
+        writeLog(`${label}: ${nameOf(input)} failed: ${error.name} ${error.message}`);
+      }
+      updateStatus();
+    }
+
+    function batchSetSelection(label) {
+      writeLog(`${label}: start; active=${nameOf(document.activeElement)}`);
+      inputs.forEach(input => setRange(input, label));
+      writeLog(`${label}: end; active=${nameOf(document.activeElement)}`);
+      updateStatus();
+    }
+
+    async function autoBatch() {
+      writeLog('auto: focus input A');
+      inputs[0].focus();
+      updateStatus();
+      await sleep(360);
+      batchSetSelection('auto batch');
+    }
+
+    function batchWithFocus() {
+      writeLog(`batch focus: start; active=${nameOf(document.activeElement)}`);
+      inputs.forEach(input => {
+        input.focus();
+        setRange(input, 'batch focus');
+      });
+      writeLog(`batch focus: end; active=${nameOf(document.activeElement)}`);
+      updateStatus();
+    }
+
+    function activeOnly() {
+      const active = document.activeElement;
+      if (!inputs.includes(active)) {
+        writeLog(`active only: skip; active=${nameOf(active)} is not a test input`);
+        updateStatus();
+        return;
+      }
+
+      setRange(active, 'active only');
+    }
+
+    async function handleAction(action) {
+      if (actionLock) return;
+      actionLock = true;
+
+      try {
+        if (action === 'auto-batch') {
+          await autoBatch();
+        } else if (action === 'batch-only') {
+          batchSetSelection('batch only');
+        } else if (action === 'batch-with-focus') {
+          batchWithFocus();
+        } else if (action === 'raf-batch') {
+          writeLog('raf batch: scheduled');
+          window.requestAnimationFrame(() => batchSetSelection('raf batch'));
+        } else if (action === 'active-only') {
+          activeOnly();
+        } else if (action === 'blur') {
+          if (document.activeElement && document.activeElement.blur) {
+            document.activeElement.blur();
+          }
+          writeLog('blur: document.activeElement.blur()');
+          updateStatus();
+        }
+      } finally {
+        window.setTimeout(() => {
+          actionLock = false;
+        }, 80);
+      }
+    }
+
+    document.addEventListener('focusin', event => {
+      if (inputs.includes(event.target)) {
+        lastFocusedInput = event.target;
+      }
+      writeLog(`focusin: ${nameOf(event.target)}; active=${nameOf(document.activeElement)}`);
+      updateStatus();
+    });
+
+    document.addEventListener('focusout', event => {
+      writeLog(`focusout: ${nameOf(event.target)}; active=${nameOf(document.activeElement)}`);
+      window.setTimeout(updateStatus, 0);
+    });
+
+    document.addEventListener('selectionchange', updateStatus);
+
+    document.querySelectorAll('[data-action]').forEach(button => {
+      button.addEventListener('click', () => handleAction(button.dataset.action));
+    });
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', updateStatus);
+      window.visualViewport.addEventListener('scroll', updateStatus);
+    }
+
+    updateStatus();
+    writeLog(`ready: ${navigator.userAgent}`);
+
+    const autorun = new URLSearchParams(window.location.search).get('autorun');
+    if (autorun === 'batch-only') {
+      writeLog('autorun: batch-only scheduled');
+      window.setTimeout(() => batchSetSelection('autorun batch only'), 900);
+    }
+  </script>
+</body>
+</html>
