@@ -16,7 +16,7 @@ tags:
 
 对于日常项目开发，Claude Code 和 Codex 已经提供了产品级 Harness，我们通常不需要从零实现底层循环。但为了让编码 Agent 更稳定地理解、修改和验证项目，仍然值得建设一套轻量的**项目级 Harness**。
 
-![Harness、Agent Loop 与项目级 Harness 完整知识总览](/articleImgs/harness-agent-loop/overview.webp)
+![Harness、Agent Loop 与项目级 Harness 完整知识总览](/articleImgs/harness-agent-loop/1000014132.jpg)
 
 ------
 
@@ -42,7 +42,7 @@ Agent Loop 是 Agent 的核心控制流程，它回答的是：
 继续分析，直到任务完成
 ```
 
-![Agent Loop 从用户目标到持续迭代的执行流程](/articleImgs/harness-agent-loop/agent-loop.webp)
+![Agent Loop 从用户目标到持续迭代的执行流程](/articleImgs/harness-agent-loop/1000014133.jpg)
 
 对应的伪代码可以写成：
 
@@ -105,7 +105,7 @@ Harness
 └─ 子 Agent 与任务编排
 ```
 
-![Harness 由 LLM、Agent Loop、工具、上下文和沙箱组成](/articleImgs/harness-agent-loop/harness.webp)
+![Harness 由 LLM、Agent Loop、工具、上下文和沙箱组成](/articleImgs/harness-agent-loop/1000014135.jpg)
 
 需要注意，业界对 Harness 的边界没有完全统一。
 
@@ -224,7 +224,7 @@ while (!done) {
 2. **项目级 Harness**：由项目团队维护，负责项目规则、架构边界、运行方式和验收标准。
 3. **任务级 Harness**：面向复杂任务临时创建，负责任务拆分、并行执行、独立复核与结果汇总。
 
-![产品级、项目级和任务级 Harness 的三层结构](/articleImgs/harness-agent-loop/harness-layers.webp)
+![产品级、项目级和任务级 Harness 的三层结构](/articleImgs/harness-agent-loop/1000014134.jpg)
 
 ### 1. 产品级 Harness
 
