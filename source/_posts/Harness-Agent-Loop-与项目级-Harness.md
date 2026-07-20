@@ -42,7 +42,7 @@ Agent Loop 是 Agent 的核心控制流程，它回答的是：
 继续分析，直到任务完成
 ```
 
-![Agent Loop 从用户目标到持续迭代的执行流程](/articleImgs/harness-agent-loop/agent-loop.svg)
+![Agent Loop 从用户目标到持续迭代的执行流程](/articleImgs/harness-agent-loop/agent-loop.webp)
 
 对应的伪代码可以写成：
 
@@ -105,7 +105,7 @@ Harness
 └─ 子 Agent 与任务编排
 ```
 
-![Harness 由 LLM、Agent Loop、工具、上下文和沙箱组成](/articleImgs/harness-agent-loop/harness.svg)
+![Harness 由 LLM、Agent Loop、工具、上下文和沙箱组成](/articleImgs/harness-agent-loop/harness.webp)
 
 需要注意，业界对 Harness 的边界没有完全统一。
 
