@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+  <title id="title">什么是 Harness</title>
+  <desc id="desc">Harness 将 LLM、Agent Loop、工具、沙箱和上下文连接成完整运行系统。</desc>
+  <defs>
+    <linearGradient id="titleGradient" x1="0" x2="1"><stop offset="0" stop-color="#2457d6"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
+    <linearGradient id="core" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f5bd8"/><stop offset="1" stop-color="#5b36d9"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="11" flood-color="#243b6b" flood-opacity="0.10"/></filter>
+    <style>
+      text{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#111827}.body{font-size:17px;fill:#4b5563}.head{font-size:22px;font-weight:800}.list{font-size:20px;font-weight:650}
+    </style>
+  </defs>
+  <rect width="1200" height="780" rx="26" fill="#fff"/><rect x="1.5" y="1.5" width="1197" height="777" rx="24.5" fill="none" stroke="#e5e7eb" stroke-width="3"/>
+  <circle cx="58" cy="48" r="5" fill="#c7d2fe"/><circle cx="82" cy="48" r="5" fill="#c7d2fe"/><circle cx="106" cy="48" r="5" fill="#c7d2fe"/>
+  <text x="60" y="104" font-size="54" font-weight="900">什么是 <tspan fill="url(#titleGradient)">Harness</tspan>？</text>
+  <text x="62" y="147" font-size="24" font-weight="650">Harness 是承载、约束并扩展 Agent Loop 的完整运行系统。</text>
+  <rect x="42" y="185" width="790" height="470" rx="24" fill="#fbfcff" stroke="#dde3f4" stroke-width="2"/>
+  <rect x="856" y="185" width="302" height="470" rx="24" fill="#fbfcff" stroke="#dde3f4" stroke-width="2"/>
+  <circle cx="440" cy="415" r="108" fill="#f6f8ff" stroke="#b6c5fa" stroke-width="4"/>
+  <circle cx="440" cy="415" r="70" fill="url(#core)" filter="url(#shadow)"/>
+  <circle cx="420" cy="397" r="7" fill="#7dd3fc"/><circle cx="460" cy="397" r="7" fill="#7dd3fc"/>
+  <path d="M416 432c14 13 34 13 48 0" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <text x="440" y="477" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">Harness</text>
+  <g filter="url(#shadow)">
+    <rect x="80" y="225" width="260" height="105" rx="18" fill="#faf7ff" stroke="#b8a5f4" stroke-width="2"/>
+    <rect x="535" y="225" width="260" height="105" rx="18" fill="#f5f8ff" stroke="#9bbafa" stroke-width="2"/>
+    <rect x="70" y="480" width="260" height="105" rx="18" fill="#f3fbf6" stroke="#9ed7b2" stroke-width="2"/>
+    <rect x="550" y="480" width="260" height="105" rx="18" fill="#fff9ed" stroke="#f2c362" stroke-width="2"/>
+    <rect x="320" y="590" width="250" height="72" rx="18" fill="#f5f8ff" stroke="#98b7f8" stroke-width="2"/>
+  </g>
+  <text x="105" y="258" class="head" fill="#6040c6">LLM（大脑）</text><text x="105" y="287" class="body">负责理解与推理，</text><text x="105" y="312" class="body">生成下一步行动。</text>
+  <text x="560" y="258" class="head" fill="#285fc8">Agent Loop</text><text x="560" y="287" class="body">让 Agent 持续思考、行动，</text><text x="560" y="312" class="body">并根据结果继续迭代。</text>
+  <text x="95" y="514" class="head" fill="#278653">Tools（工具）</text><text x="95" y="543" class="body">读取信息、调用服务、</text><text x="95" y="568" class="body">执行文件与命令操作。</text>
+  <text x="575" y="514" class="head" fill="#c47b00">Sandbox（安全护栏）</text><text x="575" y="543" class="body">隔离风险、控制权限，</text><text x="575" y="568" class="body">保护系统与数据安全。</text>
+  <text x="445" y="620" text-anchor="middle" class="head" fill="#285fc8">Context（工作记忆）</text><text x="445" y="646" text-anchor="middle" class="body">保存任务信息与历史</text>
+  <g fill="none" stroke-width="3" stroke-dasharray="7 7">
+    <path d="M340 280C390 300 397 330 410 346" stroke="#7c3aed"/><path d="M535 280C492 301 482 330 470 346" stroke="#2874d8"/>
+    <path d="M330 530C377 505 390 486 408 475" stroke="#36a269"/><path d="M550 530C505 505 491 486 472 475" stroke="#e2a01b"/>
+    <path d="M445 590V525" stroke="#2874d8"/>
+  </g>
+  <rect x="885" y="215" width="244" height="56" rx="28" fill="url(#core)"/>
+  <text x="1007" y="251" text-anchor="middle" font-size="24" font-weight="850" fill="#fff">Harness 包含</text>
+  <g class="list">
+    <circle cx="905" cy="315" r="16" fill="#ede9fe"/><text x="905" y="322" text-anchor="middle" fill="#6d4bd3">↻</text><text x="937" y="322">Agent Loop</text>
+    <circle cx="905" cy="365" r="16" fill="#dcfce7"/><text x="905" y="372" text-anchor="middle" fill="#16834b">✦</text><text x="937" y="372">工具注册与执行</text>
+    <circle cx="905" cy="415" r="16" fill="#fef3c7"/><text x="905" y="422" text-anchor="middle" fill="#b76e00">▣</text><text x="937" y="422">文件系统访问</text>
+    <circle cx="905" cy="465" r="16" fill="#dbeafe"/><text x="905" y="472" text-anchor="middle" fill="#2861c7">›_</text><text x="937" y="472">Shell 命令执行</text>
+    <circle cx="905" cy="515" r="16" fill="#ede9fe"/><text x="905" y="522" text-anchor="middle" fill="#6d4bd3">◆</text><text x="937" y="522">权限与沙箱</text>
+    <circle cx="905" cy="565" r="16" fill="#dbeafe"/><text x="905" y="572" text-anchor="middle" fill="#2861c7">●</text><text x="937" y="572">上下文与会话</text>
+    <circle cx="905" cy="615" r="16" fill="#fef3c7"/><text x="905" y="622" text-anchor="middle" fill="#b76e00">↻</text><text x="937" y="622">重试 / MCP / Skills</text>
+  </g>
+  <rect x="58" y="690" width="1084" height="62" rx="20" fill="#f7f5ff" stroke="#ddd6fe" stroke-width="2"/>
+  <circle cx="105" cy="721" r="21" fill="#fff3b8"/><text x="105" y="729" text-anchor="middle" font-size="23">!</text>
+  <text x="145" y="729" font-size="25" font-weight="850">Agent Loop 是 Harness 的一部分，Harness 才是完整系统。</text>
+</svg>
