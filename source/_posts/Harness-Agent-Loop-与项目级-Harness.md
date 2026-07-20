@@ -16,7 +16,7 @@ tags:
 
 对于日常项目开发，Claude Code 和 Codex 已经提供了产品级 Harness，我们通常不需要从零实现底层循环。但为了让编码 Agent 更稳定地理解、修改和验证项目，仍然值得建设一套轻量的**项目级 Harness**。
 
-![Harness、Agent Loop 与项目级 Harness 完整知识总览](/articleImgs/Harness-Agent-Loop-与项目级-Harness/overview.webp)
+![Harness、Agent Loop 与项目级 Harness 完整知识总览](/articleImgs/harness-agent-loop/overview.webp)
 
 ------
 
@@ -42,7 +42,7 @@ Agent Loop 是 Agent 的核心控制流程，它回答的是：
 继续分析，直到任务完成
 ```
 
-![Agent Loop 从用户目标到持续迭代的执行流程](/articleImgs/Harness-Agent-Loop-与项目级-Harness/agent-loop.svg)
+![Agent Loop 从用户目标到持续迭代的执行流程](/articleImgs/harness-agent-loop/agent-loop.svg)
 
 对应的伪代码可以写成：
 
@@ -105,7 +105,7 @@ Harness
 └─ 子 Agent 与任务编排
 ```
 
-![Harness 由 LLM、Agent Loop、工具、上下文和沙箱组成](/articleImgs/Harness-Agent-Loop-与项目级-Harness/harness.svg)
+![Harness 由 LLM、Agent Loop、工具、上下文和沙箱组成](/articleImgs/harness-agent-loop/harness.svg)
 
 需要注意，业界对 Harness 的边界没有完全统一。
 
@@ -224,7 +224,7 @@ while (!done) {
 2. **项目级 Harness**：由项目团队维护，负责项目规则、架构边界、运行方式和验收标准。
 3. **任务级 Harness**：面向复杂任务临时创建，负责任务拆分、并行执行、独立复核与结果汇总。
 
-![产品级、项目级和任务级 Harness 的三层结构](/articleImgs/Harness-Agent-Loop-与项目级-Harness/harness-layers.webp)
+![产品级、项目级和任务级 Harness 的三层结构](/articleImgs/harness-agent-loop/harness-layers.webp)
 
 ### 1. 产品级 Harness
 
@@ -302,24 +302,14 @@ This is a pnpm monorepo using Next.js and TypeScript.
 - Unit tests: `pnpm test`
 - Build: `pnpm build`
 
-## Architecture
-
-- Shared UI components belong in `packages/ui`
-- Business state belongs in stores
-- API requests belong in services
-- React components must not call backend APIs directly
-
 ## Working Rules
 
 - Do not use npm or yarn
-- Do not add production dependencies without a clear reason
 - Avoid modifying unrelated files
 - Run typecheck after changing TypeScript code
 - Update tests after changing business logic
 
 ## Definition of Done
-
-A task is complete only when:
 
 1. TypeScript passes
 2. Relevant tests pass
@@ -362,8 +352,6 @@ pnpm dev
 同时准备 `.env.example`、`docker-compose.yml`、`README.md` 和初始化脚本，不要让 Agent 猜测数据库、Redis、Node 版本、服务启动顺序或测试账号的配置方式。
 
 ### 4. 合理使用 Hooks、Skills 和 MCP
-
-它们解决的是不同问题：
 
 - **Hooks**：在固定时机确定性执行动作，例如格式化、检查危险命令或运行验证
 - **Skills**：沉淀可复用的多步骤流程，例如性能排查、代码审查或模块生成
