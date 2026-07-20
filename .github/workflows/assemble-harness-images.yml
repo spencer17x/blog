@@ -1,0 +1,77 @@
+name: Assemble original harness images
+
+on:
+  push:
+    branches:
+      - agent/fix-harness-original-images
+    paths:
+      - .image-parts/READY
+
+permissions:
+  contents: write
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Restore original images and update article
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          out_dir="source/articleImgs/harness-agent-loop"
+          mkdir -p "$out_dir"
+
+          for name in 1000014132 1000014133 1000014134 1000014135; do
+            find ".image-parts/$name" -type f -name '*.b64' -print0 \
+              | sort -z \
+              | xargs -0 cat \
+              | tr -d '\n\r ' \
+              | base64 --decode > "$out_dir/$name.jpg"
+          done
+
+          sha256sum --check <<'CHECKSUMS'
+          ad5b8dcd501673dbf814162d1a99eb26fa5ca93b3d3cba0c1b2ffe73729375b1  source/articleImgs/harness-agent-loop/1000014132.jpg
+          48ff3a728f4186f62287974940b540af9e4e9731fc0f20199bef048245f8920e  source/articleImgs/harness-agent-loop/1000014133.jpg
+          4423adb059d88880706c14c9c8d89cfdbab932548f26492eb3b492c059aff653  source/articleImgs/harness-agent-loop/1000014134.jpg
+          d507aa3b7974f64ab1414ef3b6d56d7edae90eb34e5aebfc5e0e74b30d30dd86  source/articleImgs/harness-agent-loop/1000014135.jpg
+          CHECKSUMS
+
+          python <<'PY'
+          from pathlib import Path
+
+          article = Path('source/_posts/Harness-Agent-Loop-与项目级-Harness.md')
+          text = article.read_text(encoding='utf-8')
+          replacements = {
+              '/articleImgs/harness-agent-loop/overview.webp': '/articleImgs/harness-agent-loop/1000014132.jpg',
+              '/articleImgs/harness-agent-loop/agent-loop.webp': '/articleImgs/harness-agent-loop/1000014133.jpg',
+              '/articleImgs/harness-agent-loop/harness-layers.webp': '/articleImgs/harness-agent-loop/1000014134.jpg',
+              '/articleImgs/harness-agent-loop/harness.webp': '/articleImgs/harness-agent-loop/1000014135.jpg',
+          }
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f'missing expected article reference: {old}')
+              text = text.replace(old, new)
+          article.write_text(text, encoding='utf-8')
+          PY
+
+          rm -f \
+            "$out_dir/overview.webp" \
+            "$out_dir/agent-loop.webp" \
+            "$out_dir/harness.webp" \
+            "$out_dir/harness-layers.webp" \
+            "$out_dir/agent-loop.svg" \
+            "$out_dir/harness.svg"
+          rm -rf "source/images/harness-agent-loop"
+          rm -rf "source/articleImgs/Harness-Agent-Loop-与项目级-Harness"
+          rm -rf .image-parts
+          rm -f .github/workflows/assemble-harness-images.yml
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "fix: use original harness article images"
+          git push
