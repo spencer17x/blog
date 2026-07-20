@@ -1,0 +1,1 @@
+Original image files restored and SHA-256 verified by GitHub Actions.
