@@ -16,6 +16,13 @@ tags:
 
 对于日常项目开发，Claude Code 和 Codex 已经提供了产品级 Harness，我们通常不需要从零实现底层循环。但为了让编码 Agent 更稳定地理解、修改和验证项目，仍然值得建设一套轻量的**项目级 Harness**。
 
+<div style="text-align:center;margin:30px 0;">
+  <a href="/images/harness-agent-loop/harness-agent-loop-overview.webp" target="_blank" rel="noopener">
+    <img src="/images/harness-agent-loop/harness-agent-loop-overview.webp" alt="Harness、Agent Loop 与项目级 Harness 完整知识总览" style="width:100%;max-width:720px;border-radius:12px;" />
+  </a>
+  <div style="margin-top:8px;color:#888;font-size:14px;">全文知识总览，点击图片可以查看大图</div>
+</div>
+
 ------
 
 ## 一、什么是 Agent Loop？
@@ -40,8 +47,10 @@ Agent Loop 是 Agent 的核心控制流程，它回答的是：
 继续分析，直到任务完成
 ```
 
-<div style="text-align:center;margin:28px 0;">
-  <img src="/images/harness-agent-loop/agent-loop-process.svg" alt="Agent Loop 思考、行动、观察和迭代流程" loading="lazy" style="width:100%;border-radius:12px;" />
+<div style="text-align:center;margin:30px 0;">
+  <a href="/images/harness-agent-loop/agent-loop-process.svg" target="_blank" rel="noopener">
+    <img src="/images/harness-agent-loop/agent-loop-process.svg" alt="Agent Loop 从用户目标到持续迭代的执行流程" loading="lazy" style="width:100%;border-radius:12px;" />
+  </a>
   <div style="margin-top:8px;color:#888;font-size:14px;">Agent Loop 关注的是：完成当前一步后，接下来做什么？</div>
 </div>
 
@@ -62,7 +71,7 @@ while (!done) {
 }
 ```
 
-真实的 Agent Loop 会复杂得多，还需要考虑：
+真实的 Agent Loop 会复杂得多，还需要处理：
 
 - 一次返回多个工具调用时如何调度
 - 工具失败后是否重试
@@ -106,14 +115,16 @@ Harness
 └─ 子 Agent 与任务编排
 ```
 
-<div style="text-align:center;margin:28px 0;">
-  <img src="/images/harness-agent-loop/harness-components.svg" alt="Harness 由 LLM、Agent Loop、工具、上下文和沙箱等组成" loading="lazy" style="width:100%;border-radius:12px;" />
-  <div style="margin-top:8px;color:#888;font-size:14px;">Agent Loop 是 Harness 的核心组成部分，但 Harness 才是完整运行系统</div>
+<div style="text-align:center;margin:30px 0;">
+  <a href="/images/harness-agent-loop/harness-components.svg" target="_blank" rel="noopener">
+    <img src="/images/harness-agent-loop/harness-components.svg" alt="Harness 由 LLM、Agent Loop、工具、上下文和沙箱组成" loading="lazy" style="width:100%;border-radius:12px;" />
+  </a>
+  <div style="margin-top:8px;color:#888;font-size:14px;">Agent Loop 是 Harness 的一部分，Harness 才是完整的运行系统</div>
 </div>
 
-需要注意，业界对 Harness 的边界并没有完全统一。
+需要注意，业界对 Harness 的边界没有完全统一。
 
-OpenAI 在介绍 Codex 时，有时会将 Codex Harness 描述为支撑各个产品形态的 Agent Loop 和执行逻辑；而在更宽泛的工程语境中，Harness 通常还包含工具、沙箱、状态、权限与扩展机制。
+OpenAI 在介绍 Codex 时，有时会把 Codex Harness 描述为支撑不同产品形态的 Agent Loop 与执行逻辑；在更宽泛的工程语境中，Harness 通常还包括工具、沙箱、状态、权限和扩展机制。
 
 本文采用更宽泛的定义：
 
@@ -168,7 +179,7 @@ OpenAI 在介绍 Codex 时，有时会将 Codex Harness 描述为支撑各个产
 测试通过并输出结果
 ```
 
-其中，下面这段属于 Agent Loop：
+其中下面这段属于 Agent Loop：
 
 ```text
 搜索 → 分析 → 修改 → 测试 → 观察结果 → 再次分析
@@ -228,9 +239,11 @@ while (!done) {
 2. **项目级 Harness**：由项目团队维护，负责项目规则、架构边界、运行方式和验收标准。
 3. **任务级 Harness**：面向复杂任务临时创建，负责任务拆分、并行执行、独立复核与结果汇总。
 
-<div style="text-align:center;margin:28px 0;">
-  <img src="/images/harness-agent-loop/harness-three-layers.svg" alt="产品级、项目级和任务级 Harness 三层结构" loading="lazy" style="width:100%;border-radius:12px;" />
-  <div style="margin-top:8px;color:#888;font-size:14px;">日常开发的重点通常是项目级 Harness，而不是重写底层 Agent 系统</div>
+<div style="text-align:center;margin:30px 0;">
+  <a href="/images/harness-agent-loop/harness-three-layers.webp" target="_blank" rel="noopener">
+    <img src="/images/harness-agent-loop/harness-three-layers.webp" alt="产品级、项目级和任务级 Harness 的三层结构" loading="lazy" style="width:100%;border-radius:12px;" />
+  </a>
+  <div style="margin-top:8px;color:#888;font-size:14px;">日常开发的重点通常是建设项目级 Harness，而不是重写底层 Agent 系统</div>
 </div>
 
 ### 1. 产品级 Harness
