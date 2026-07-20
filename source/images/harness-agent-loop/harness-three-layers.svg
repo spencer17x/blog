@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+  <title id="title">三层 Harness 的区别</title>
+  <desc id="desc">产品级 Harness、项目级 Harness 和任务级 Harness 的职责与适用范围。</desc>
+  <defs>
+    <linearGradient id="titleGradient" x1="0" x2="1"><stop offset="0" stop-color="#2457d6"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#243b6b" flood-opacity="0.09"/></filter>
+    <style>text{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#111827}.coltitle{font-size:26px;font-weight:900}.sub{font-size:18px;font-weight:700}.item{font-size:19px;font-weight:650}.desc{font-size:17px;fill:#4b5563}</style>
+  </defs>
+  <rect width="1200" height="820" rx="26" fill="#fff"/><rect x="1.5" y="1.5" width="1197" height="817" rx="24.5" fill="none" stroke="#e5e7eb" stroke-width="3"/>
+  <text x="60" y="88" font-size="52" font-weight="900">三层 <tspan fill="url(#titleGradient)">Harness</tspan> 的区别</text>
+  <text x="62" y="128" font-size="22" fill="#4b5563">从底层能力到项目实践，再到复杂任务编排，层层递进、各司其职。</text>
+  <g filter="url(#shadow)">
+    <rect x="45" y="165" width="350" height="430" rx="24" fill="#f4fbf7" stroke="#98d4ae" stroke-width="2"/>
+    <rect x="425" y="165" width="350" height="430" rx="24" fill="#f5f8ff" stroke="#9dbafd" stroke-width="2"/>
+    <rect x="805" y="165" width="350" height="430" rx="24" fill="#fff9ef" stroke="#f0c26f" stroke-width="2"/>
+  </g>
+  <circle cx="88" cy="215" r="24" fill="#d6f5e1"/><text x="88" y="223" text-anchor="middle" font-size="25" fill="#238d53">◆</text>
+  <text x="125" y="211" class="coltitle" fill="#16834b">第一层：产品级 Harness</text><text x="125" y="240" class="sub" fill="#278653">Claude Code / Codex 提供</text>
+  <text x="70" y="285" class="desc">由产品方提供与维护，是所有项目</text><text x="70" y="310" class="desc">共享的底层能力与运行环境。</text>
+  <line x1="70" y1="334" x2="370" y2="334" stroke="#9fd9b4"/>
+  <g class="item"><text x="75" y="375" fill="#16834b">●</text><text x="102" y="375">Agent Loop 与模型调用</text><text x="75" y="420" fill="#16834b">●</text><text x="102" y="420">工具、上下文与会话</text><text x="75" y="465" fill="#16834b">●</text><text x="102" y="465">权限控制与沙箱</text><text x="75" y="510" fill="#16834b">●</text><text x="102" y="510">错误处理与恢复</text><text x="75" y="555" fill="#16834b">●</text><text x="102" y="555">普通开发者无需重写</text></g>
+  <circle cx="468" cy="215" r="24" fill="#dbeafe"/><text x="468" y="223" text-anchor="middle" font-size="25" fill="#2861c7">▣</text>
+  <text x="505" y="211" class="coltitle" fill="#2457bd">第二层：项目级 Harness</text><text x="505" y="240" class="sub" fill="#2457bd">项目团队维护</text>
+  <text x="450" y="285" class="desc">定义项目的行为规范、工程实践、</text><text x="450" y="310" class="desc">运行方式与质量门槛。</text>
+  <line x1="450" y1="334" x2="750" y2="334" stroke="#a9c4ff"/>
+  <g class="item"><text x="455" y="375" fill="#2861c7">●</text><text x="482" y="375">CLAUDE.md / AGENTS.md</text><text x="455" y="420" fill="#2861c7">●</text><text x="482" y="420">脚本与环境初始化</text><text x="455" y="465" fill="#2861c7">●</text><text x="482" y="465">lint / typecheck / test</text><text x="455" y="510" fill="#2861c7">●</text><text x="482" y="510">Hooks / Skills / MCP</text><text x="455" y="555" fill="#2861c7">●</text><text x="482" y="555">Definition of Done</text></g>
+  <circle cx="848" cy="215" r="24" fill="#ffedc7"/><text x="848" y="223" text-anchor="middle" font-size="25" fill="#c87200">⌘</text>
+  <text x="885" y="211" class="coltitle" fill="#c45d00">第三层：任务级 Harness</text><text x="885" y="240" class="sub" fill="#c45d00">复杂任务时使用</text>
+  <text x="830" y="285" class="desc">用于大规模改动、并行执行、</text><text x="830" y="310" class="desc">多角色协作与结果校验。</text>
+  <line x1="830" y1="334" x2="1130" y2="334" stroke="#f4ca7f"/>
+  <g class="item"><text x="835" y="375" fill="#c87200">●</text><text x="862" y="375">多 Agent 并行协作</text><text x="835" y="420" fill="#c87200">●</text><text x="862" y="420">独立 Worktree</text><text x="835" y="465" fill="#c87200">●</text><text x="862" y="465">Reviewer 与测试 Agent</text><text x="835" y="510" fill="#c87200">●</text><text x="862" y="510">交叉验证与结果汇总</text><text x="835" y="555" fill="#c87200">●</text><text x="862" y="555">适合高价值复杂任务</text></g>
+  <rect x="45" y="625" width="1110" height="112" rx="22" fill="#fbfcff" stroke="#dce2f2" stroke-width="2"/>
+  <text x="70" y="662" font-size="25" font-weight="900" fill="#4338ca">普通项目应该做到什么程度？</text>
+  <g>
+    <rect x="70" y="684" width="245" height="36" rx="18" fill="#f2efff"/><text x="192" y="708" text-anchor="middle" font-size="18" font-weight="750">1. 清晰的项目说明</text>
+    <rect x="335" y="684" width="245" height="36" rx="18" fill="#eef5ff"/><text x="457" y="708" text-anchor="middle" font-size="18" font-weight="750">2. 统一的验证命令</text>
+    <rect x="600" y="684" width="245" height="36" rx="18" fill="#f3fbf6"/><text x="722" y="708" text-anchor="middle" font-size="18" font-weight="750">3. 明确的开发规则</text>
+    <rect x="865" y="684" width="265" height="36" rx="18" fill="#fff6e8"/><text x="997" y="708" text-anchor="middle" font-size="18" font-weight="750">4. 可执行的完成标准</text>
+  </g>
+  <rect x="45" y="760" width="1110" height="42" rx="18" fill="#f6f3ff"/>
+  <text x="600" y="788" text-anchor="middle" font-size="23" font-weight="900" fill="#5138c7">日常开发的重点通常是建设项目级 Harness，而不是重写底层 Agent 系统。</text>
+</svg>
