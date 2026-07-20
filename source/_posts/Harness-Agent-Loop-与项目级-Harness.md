@@ -16,12 +16,7 @@ tags:
 
 对于日常项目开发，Claude Code 和 Codex 已经提供了产品级 Harness，我们通常不需要从零实现底层循环。但为了让编码 Agent 更稳定地理解、修改和验证项目，仍然值得建设一套轻量的**项目级 Harness**。
 
-<div style="text-align:center;margin:30px 0;">
-  <a href="/images/harness-agent-loop/harness-agent-loop-overview.webp" target="_blank" rel="noopener">
-    <img src="/images/harness-agent-loop/harness-agent-loop-overview.webp" alt="Harness、Agent Loop 与项目级 Harness 完整知识总览" style="width:100%;max-width:720px;border-radius:12px;" />
-  </a>
-  <div style="margin-top:8px;color:#888;font-size:14px;">全文知识总览，点击图片可以查看大图</div>
-</div>
+![Harness、Agent Loop 与项目级 Harness 完整知识总览](/articleImgs/Harness-Agent-Loop-与项目级-Harness/overview.webp)
 
 ------
 
@@ -47,12 +42,7 @@ Agent Loop 是 Agent 的核心控制流程，它回答的是：
 继续分析，直到任务完成
 ```
 
-<div style="text-align:center;margin:30px 0;">
-  <a href="/images/harness-agent-loop/agent-loop-process.svg" target="_blank" rel="noopener">
-    <img src="/images/harness-agent-loop/agent-loop-process.svg" alt="Agent Loop 从用户目标到持续迭代的执行流程" loading="lazy" style="width:100%;border-radius:12px;" />
-  </a>
-  <div style="margin-top:8px;color:#888;font-size:14px;">Agent Loop 关注的是：完成当前一步后，接下来做什么？</div>
-</div>
+![Agent Loop 从用户目标到持续迭代的执行流程](/articleImgs/Harness-Agent-Loop-与项目级-Harness/agent-loop.svg)
 
 对应的伪代码可以写成：
 
@@ -115,12 +105,7 @@ Harness
 └─ 子 Agent 与任务编排
 ```
 
-<div style="text-align:center;margin:30px 0;">
-  <a href="/images/harness-agent-loop/harness-components.svg" target="_blank" rel="noopener">
-    <img src="/images/harness-agent-loop/harness-components.svg" alt="Harness 由 LLM、Agent Loop、工具、上下文和沙箱组成" loading="lazy" style="width:100%;border-radius:12px;" />
-  </a>
-  <div style="margin-top:8px;color:#888;font-size:14px;">Agent Loop 是 Harness 的一部分，Harness 才是完整的运行系统</div>
-</div>
+![Harness 由 LLM、Agent Loop、工具、上下文和沙箱组成](/articleImgs/Harness-Agent-Loop-与项目级-Harness/harness.svg)
 
 需要注意，业界对 Harness 的边界没有完全统一。
 
@@ -239,12 +224,7 @@ while (!done) {
 2. **项目级 Harness**：由项目团队维护，负责项目规则、架构边界、运行方式和验收标准。
 3. **任务级 Harness**：面向复杂任务临时创建，负责任务拆分、并行执行、独立复核与结果汇总。
 
-<div style="text-align:center;margin:30px 0;">
-  <a href="/images/harness-agent-loop/harness-three-layers.webp" target="_blank" rel="noopener">
-    <img src="/images/harness-agent-loop/harness-three-layers.webp" alt="产品级、项目级和任务级 Harness 的三层结构" loading="lazy" style="width:100%;border-radius:12px;" />
-  </a>
-  <div style="margin-top:8px;color:#888;font-size:14px;">日常开发的重点通常是建设项目级 Harness，而不是重写底层 Agent 系统</div>
-</div>
+![产品级、项目级和任务级 Harness 的三层结构](/articleImgs/Harness-Agent-Loop-与项目级-Harness/harness-layers.webp)
 
 ### 1. 产品级 Harness
 
@@ -347,8 +327,6 @@ A task is complete only when:
 4. The final response explains the root cause and validation
 ```
 
-这些文件不是为了堆积所有知识，而是为了提供长期稳定的项目约束、常用命令、目录边界和完成标准。
-
 ### 2. 确定性的验证命令
 
 不要只告诉 Agent“确保代码没有问题”，而应该提供可以执行的验证方式：
@@ -370,8 +348,6 @@ A task is complete only when:
 ```text
 修改代码 → 运行验证 → 观察错误 → 继续修复 → 验证通过
 ```
-
-没有测试、类型检查或构建反馈时，Agent 只能根据代码表面推测“应该可以运行”。
 
 ### 3. 可重复的开发环境
 
