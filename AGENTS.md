@@ -10,7 +10,7 @@ Hexo 博客站点，主题为本仓库内的 `themes/icarus`。
 
 - 站点源码在 `source/`；文章在 `source/_posts/`。
 - 生成/部署产物（`public/`、`db.json`、`.deploy_git/`）不要手工修改或提交。
-- 优先使用 `pnpm@11.5.0`，不要改用 yarn 作为 SoT 锁文件。
+- 使用 `pnpm@11.17.0`，不要改用 yarn 作为 SoT 锁文件。
 
 ## 开始工作前
 
@@ -34,22 +34,27 @@ Hexo 博客站点，主题为本仓库内的 `themes/icarus`。
 
 ## 运行时与环境
 
-- Node.js `>=24.0.0`、`.nvmrc` `24.16.0`、`pnpm@11.5.0`。
+- Node.js `>=24.18.0 <25`、`.nvmrc` `24.18.0`、`pnpm@11.17.0`（兼容范围 `>=11.17.0 <12`）。
+- `themes/icarus/package.json#engines` 是 vendored 主题的消费者兼容元数据，不是本仓库的开发工具链版本。
 
 ## 命令与验证
 
 ```bash
 pnpm install
-pnpm build      # hexo generate — 配置/主题/依赖改动后的 handoff
+pnpm check      # 主题 lint + clean Hexo build；配置/主题/依赖改动后的 handoff
+pnpm lint
+pnpm build
 pnpm server
 pnpm clean
 pnpm deploy
 pnpm new "<title>"
 ```
 
+本仓库是内容站点：没有 TypeScript 源码和单元测试框架，也没有采用会大面积重写文章与 vendored 主题的全仓格式化器。因此权威 `pnpm check` 有意只运行主题 ESLint、清理生成状态和完整 Hexo 构建；这是仓库类型例外，不代表跳过已有检查。
+
 | 变更 | 必要检查 |
 | --- | --- |
-| 配置 / 主题 / 依赖 | `pnpm build` |
+| 配置 / 主题 / 依赖 | `pnpm check` |
 | 纯文章内容 | `git diff --check`；链接/front matter 改动较多时建议 `pnpm build` |
 | 任意已跟踪文件 | 不提交 `node_modules/`、`public/`、`db.json`、`.deploy_git/` |
 
@@ -67,17 +72,10 @@ pnpm new "<title>"
 
 - Conventional Commits：`feat` `fix` `docs` `refactor` `perf` `test` `build` `ci` `chore` `revert`。
 - 标题 ≤100 字符；不要盲目 `git add -A`。
+- 本仓不要求本地 Git hooks；远端 CI 的 `pnpm check` 是结构性改动的权威门禁。
 
 ## 完成定义
 
 - [ ] 行为完成且不破坏生成/部署约定
 - [ ] 必要检查已跑或披露跳过
 - [ ] 交接列出文件、验证与风险
-
-## Standards pin
-
-- **dev-standards:** `dev-standards/v0.1.0`（或 skills 仓 SHA）
-- **Language packs:** typescript-node (light)
-- **Hooks:** none required
-- **AGENTS language:** zh-primary
-- **Handoff:** `pnpm build`（结构性改动）

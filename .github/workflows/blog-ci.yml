@@ -1,68 +1,78 @@
 name: CI
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
   workflow_dispatch:
 
 env:
+  TZ: Asia/Shanghai
   GIT_USER: spencer17x
   GIT_EMAIL: 1253478653@qq.com
   DEPLOY_REPO: spencer17x/Spencer17x.github.io
   DEPLOY_BRANCH: main
 
+permissions:
+  contents: read
+
+concurrency:
+  group: blog-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
-    name: Build on node ${{ matrix.node_version }} and ${{ matrix.os }}
+    name: Verify and deploy
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node_version: [24.x]
+    timeout-minutes: 20
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check theme and site
+        run: pnpm run check
 
       - name: Checkout deploy repo
-        uses: actions/checkout@v4
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: ${{ env.DEPLOY_REPO }}
           ref: ${{ env.DEPLOY_BRANCH }}
           path: .deploy_git
+          persist-credentials: false
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 11.5.0
-
-      - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node_version }}
-          cache: 'pnpm'
-
-      - name: Configuration environment
+      - name: Configure deployment
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         env:
-          HEXO_DEPLOY_PRI: ${{secrets.HEXO_DEPLOY_PRI}}
+          HEXO_DEPLOY_PRI: ${{ secrets.HEXO_DEPLOY_PRI }}
         run: |
-          sudo timedatectl set-timezone "Asia/Shanghai"
-          mkdir -p ~/.ssh/
-          echo "$HEXO_DEPLOY_PRI" > ~/.ssh/id_rsa
+          test -n "$HEXO_DEPLOY_PRI"
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$HEXO_DEPLOY_PRI" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-          git config --global user.name $GIT_USER
-          git config --global user.email $GIT_EMAIL
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Clean
-        run: pnpm run clean
-
-      - name: Build
-        run: pnpm run build
+          git -C .deploy_git config user.name "$GIT_USER"
+          git -C .deploy_git config user.email "$GIT_EMAIL"
 
       - name: Deploy hexo
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: pnpm run deploy

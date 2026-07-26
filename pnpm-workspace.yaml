@@ -1,3 +1,6 @@
+packages:
+  - 'themes/icarus'
+
 allowBuilds:
   ejs: true
   hexo-util: true
