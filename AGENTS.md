@@ -1,59 +1,83 @@
-# AGENTS.md
+# 博客 Agent Guide
 
-本文件适用于整个仓库。
+本文件适用于整个仓库。保持内容精简。
 
-## 项目概览
+## 项目定位
 
-这是一个 Hexo 6 博客站点，当前主题为本仓库内的 `themes/icarus`。
+Hexo 博客站点，主题为本仓库内的 `themes/icarus`。
 
-- 站点源码在 `source/`。
-- 文章在 `source/_posts/`。
-- 页面/文章脚手架在 `scaffolds/`。
-- Hexo 主配置在 `_config.yml`。
-- Icarus 主题配置在 `_config.icarus.yml`。
-- 本地主题代码在 `themes/icarus/`。
-- `public/`、`db.json`、`.deploy_git/` 是生成或部署产物，通常不要手工修改。
+持久约定：
 
-## 常用命令
+- 站点源码在 `source/`；文章在 `source/_posts/`。
+- 生成/部署产物（`public/`、`db.json`、`.deploy_git/`）不要手工修改或提交。
+- 优先使用 `pnpm@11.5.0`，不要改用 yarn 作为 SoT 锁文件。
 
-优先使用 pnpm，本项目声明的包管理器是 `pnpm@11.5.0`。
+## 开始工作前
+
+1. 阅读用户请求与相关源码/配置。
+2. 检查 `git status --short`，保留无关改动。
+3. 选择最小改动；除非用户明确要求，不要 commit/push/deploy。
+
+## 仓库地图
+
+- `source/`：站点内容
+- `source/_posts/`：文章
+- `scaffolds/`：脚手架
+- `_config.yml` / `_config.icarus.yml`：站点与主题配置
+- `themes/icarus/`：本地主题
+- `public/`、`db.json`、`.deploy_git/`：生成或部署产物
+
+## 编码约定
+
+- 语言包：typescript-node（轻量；主要为 Hexo/Node 工具链）。
+- 用户可见文章以中文为主；配置键与命令保持英文。
+
+## 运行时与环境
+
+- Node.js `>=24.0.0`、`.nvmrc` `24.16.0`、`pnpm@11.5.0`。
+
+## 命令与验证
 
 ```bash
 pnpm install
-pnpm build
+pnpm build      # hexo generate — 配置/主题/依赖改动后的 handoff
 pnpm server
 pnpm clean
 pnpm deploy
 pnpm new "<title>"
 ```
 
-说明：
-
-- `pnpm build` 等价于 `hexo generate`，用于验证站点能否生成。
-- `pnpm server` 用于本地预览。
-- `pnpm clean` 会清理 Hexo 生成缓存和产物。
-- 仓库里存在 `yarn.lock`，但除非明确要求迁移或同步锁文件，否则不要更新它。
+| 变更 | 必要检查 |
+| --- | --- |
+| 配置 / 主题 / 依赖 | `pnpm build` |
+| 纯文章内容 | `git diff --check`；链接/front matter 改动较多时建议 `pnpm build` |
+| 任意已跟踪文件 | 不提交 `node_modules/`、`public/`、`db.json`、`.deploy_git/` |
 
 ## 写作约定
 
-- 新文章优先放在 `source/_posts/`。
-- 文章文件名沿用现有风格：中文标题可用连字符连接，保留必要英文技术名词。
-- front matter 至少包含 `title`、`date`、`tags`。
-- 技术文章正文可以使用中文标题结构；已有文章同时存在 `#` 与 `##` 风格，新增内容优先保持同篇文章内一致。
-- 引用站内 demo 或图片时，使用 Hexo 渲染后的站内路径，例如 `/demos/...` 或 `/articleImgs/...`。
-- 不要把大体积二进制文件直接放进文章目录；如确需示例文件，优先放在 `source/files/` 下的独立子目录。
+- 新文章优先 `source/_posts/`；front matter 至少含 `title`、`date`、`tags`。
+- 站内资源用渲染后路径（如 `/demos/...`）；大体积二进制优先 `source/files/` 子目录。
 
 ## 主题与样式
 
-- 主题布局使用 Inferno/JSX，主要在 `themes/icarus/layout/`。
-- 主题样式使用 Stylus，主要在 `themes/icarus/source/css/` 和 `themes/icarus/include/style/`。
-- 修改主题配置优先改 `_config.icarus.yml`；只有配置无法满足需求时再改 `themes/icarus/` 代码。
-- 主题文件来自 Icarus，上游结构尽量保持清晰，避免无关重排或大面积格式化。
+- 布局 Inferno/JSX：`themes/icarus/layout/`；样式 Stylus：`themes/icarus/source/css/` 等。
+- 优先改 `_config.icarus.yml`；避免对上游主题大面积无关格式化。
 
-## 开发注意事项
+## Git 与提交
 
-- 编辑前先检查当前工作区状态，避免覆盖用户未提交的修改。
-- 不要提交或手改 `node_modules/`、`public/`、`db.json`、`.deploy_git/`。
-- 对配置、主题布局、样式或依赖有改动时，至少运行 `pnpm build` 验证。
-- 对纯文章内容改动，可以不强制构建；如改动 front matter、站内链接、图片路径或 Markdown 语法较多，建议运行 `pnpm build`。
-- 保持改动聚焦；不要顺手重写无关文章、主题文件或锁文件。
+- Conventional Commits：`feat` `fix` `docs` `refactor` `perf` `test` `build` `ci` `chore` `revert`。
+- 标题 ≤100 字符；不要盲目 `git add -A`。
+
+## 完成定义
+
+- [ ] 行为完成且不破坏生成/部署约定
+- [ ] 必要检查已跑或披露跳过
+- [ ] 交接列出文件、验证与风险
+
+## Standards pin
+
+- **dev-standards:** `dev-standards/v0.1.0`（或 skills 仓 SHA）
+- **Language packs:** typescript-node (light)
+- **Hooks:** none required
+- **AGENTS language:** zh-primary
+- **Handoff:** `pnpm build`（结构性改动）
