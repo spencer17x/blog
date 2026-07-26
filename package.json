@@ -2,15 +2,17 @@
   "name": "hexo-site",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@11.5.0",
+  "packageManager": "pnpm@11.17.0",
   "engines": {
-    "node": ">=24.0.0",
-    "pnpm": ">=11.5.0"
+    "node": ">=24.18.0 <25",
+    "pnpm": ">=11.17.0 <12"
   },
   "scripts": {
     "build": "hexo generate",
-    "clean": "pnpm hexo clean",
+    "check": "pnpm run lint && pnpm run clean && pnpm run build",
+    "clean": "hexo clean",
     "deploy": "hexo deploy",
+    "lint": "pnpm --filter hexo-theme-icarus lint",
     "server": "hexo server",
     "new": "hexo new"
   },
@@ -33,7 +35,6 @@
     "hexo-renderer-marked": "^7.0.1",
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
-    "hexo-theme-landscape": "^0.0.3",
     "inferno": "^8.2.3",
     "inferno-create-element": "^8.2.3"
   }
