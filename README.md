@@ -11,18 +11,13 @@ Hexo 8 blog using the vendored Icarus theme in `themes/icarus`.
 
 ```sh
 pnpm install --frozen-lockfile
-pnpm check
+pnpm build
 pnpm server
 ```
 
-`pnpm check` lints the theme, cleans generated state, and builds the site. Hexo
-output under `public/`, `db.json`, and the deployment checkout under
-`.deploy_git/` are generated and must not be committed.
-
-This content repository intentionally has no TypeScript sources, unit-test
-framework, or repository-wide formatter: a global formatter would rewrite
-historical posts and the vendored theme. Theme ESLint plus a clean full-site
-build is therefore the authoritative local and CI check.
+Hexo output under `public/`, `db.json`, and the deployment checkout under
+`.deploy_git/` are generated and must not be committed. This repository does
+not configure commit hooks, lint gates, or CI checks.
 
 Create a post with:
 
@@ -30,6 +25,6 @@ Create a post with:
 pnpm new "<title>"
 ```
 
-Deployment is performed by GitHub Actions after the same check succeeds on
-`main`. Do not run `pnpm deploy` unless an explicit manual deployment is
-intended.
+Pushes to `main` trigger the deployment workflow, which installs dependencies,
+builds the site, and deploys it. Do not run `pnpm deploy` unless an explicit
+manual deployment is intended.

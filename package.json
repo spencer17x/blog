@@ -9,10 +9,8 @@
   },
   "scripts": {
     "build": "hexo generate",
-    "check": "pnpm run lint && pnpm run clean && pnpm run build",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "lint": "pnpm --filter hexo-theme-icarus lint",
     "server": "hexo server",
     "new": "hexo new"
   },

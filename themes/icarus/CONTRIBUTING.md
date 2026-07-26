@@ -3,15 +3,6 @@
 This directory is maintained as part of the parent blog repository. The root
 `AGENTS.md` is authoritative for package management, commits, and validation.
 
-## Code styles
-
-Please refer to the [.eslintrc.json](https://github.com/ppoffice/hexo-theme-icarus/blob/master/.eslintrc.json).
-From the repository root, run:
-
-```sh
-pnpm --filter hexo-theme-icarus lint
-```
-
 ## Project versioning
 
 We use [SemVer](http://semver.org/) for versioning.
@@ -19,9 +10,8 @@ Any changes to the code base should not be released using an existing version.
 
 ## Submit changes
 
-1. Fork this repository, make changes to it, and run it against some actual Hexo sites to see if 
-anything is broken.
-Run the root `pnpm check` command before submitting changes.
+1. Fork this repository, make changes to it, and run it against some actual Hexo sites to see if
+anything is broken. Run the root `pnpm build` command before submitting changes.
 2. Submit a pull request to our repository. Please make sure you followed the instructions
 above.
 3. We will review the pull request regularly and inform you of our questions and any changes 

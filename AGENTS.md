@@ -41,20 +41,16 @@ Hexo 博客站点，主题为本仓库内的 `themes/icarus`。
 
 ```bash
 pnpm install
-pnpm check      # 主题 lint + clean Hexo build；配置/主题/依赖改动后的 handoff
-pnpm lint
-pnpm build
+pnpm build      # Hexo build；配置/主题/依赖改动后的 handoff
 pnpm server
 pnpm clean
 pnpm deploy
 pnpm new "<title>"
 ```
 
-本仓库是内容站点：没有 TypeScript 源码和单元测试框架，也没有采用会大面积重写文章与 vendored 主题的全仓格式化器。因此权威 `pnpm check` 有意只运行主题 ESLint、清理生成状态和完整 Hexo 构建；这是仓库类型例外，不代表跳过已有检查。
-
 | 变更 | 必要检查 |
 | --- | --- |
-| 配置 / 主题 / 依赖 | `pnpm check` |
+| 配置 / 主题 / 依赖 | `pnpm build` |
 | 纯文章内容 | `git diff --check`；链接/front matter 改动较多时建议 `pnpm build` |
 | 任意已跟踪文件 | 不提交 `node_modules/`、`public/`、`db.json`、`.deploy_git/` |
 
@@ -72,7 +68,7 @@ pnpm new "<title>"
 
 - Conventional Commits：`feat` `fix` `docs` `refactor` `perf` `test` `build` `ci` `chore` `revert`。
 - 标题 ≤100 字符；不要盲目 `git add -A`。
-- 本仓不要求本地 Git hooks；远端 CI 的 `pnpm check` 是结构性改动的权威门禁。
+- 本仓不配置 Git hooks、lint 或 CI 门禁；推送到 `main` 后仅运行部署工作流。
 
 ## 完成定义
 

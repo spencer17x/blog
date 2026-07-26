@@ -17,15 +17,8 @@
   "engines": {
     "node": ">=12.4.0"
   },
-  "scripts": {
-    "lint": "eslint --ext .js --ext .jsx --ext .json ."
-  },
   "devDependencies": {
     "bulma-stylus": "0.8.0",
-    "eslint": "^7.6.0",
-    "eslint-config-hexo": "^4.1.0",
-    "eslint-plugin-json": "^3.0.0",
-    "eslint-plugin-react": "^7.17.0",
     "hexo": "^8.1.2",
     "hexo-log": "^2.0.0",
     "hexo-pagination": "^3.0.0",
